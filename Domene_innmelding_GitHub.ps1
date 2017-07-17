@@ -15,6 +15,8 @@ if (Test-Connection 'DOMENEKONTROLLEREN. EG: testdc.evry.local' -Quiet)
 else 
     {
         Write-Host "`tMå kobles til nettverket med Kabel!" -ForegroundColor Yellow
+        Start-Sleep -Seconds 3
+        Exit
     }
 
 Start-Sleep -s 2
