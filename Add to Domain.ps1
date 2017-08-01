@@ -1,7 +1,7 @@
 ﻿#Lord Hagen / olehag04@nfk.no
 
 #DOMAIN, example: 'google.local'.
-$domain = ""
+$Domain = ""
 #A DC in the Domain, example: 'dc1.google.local'.
 $DomainDC = ""
 #OU path, example: 'OU=Machine, OU=SalesTeam, DC=google, DC=local'.
@@ -42,7 +42,7 @@ Write-Host ""
 
 Write-Host "`tAuthenticate with admin credentials!"
 
-add-computer -domainname $domain -oupath $OUPath -Credential get-credential
+add-computer -domainname $Domain -oupath $OUPath -Credential get-credential
 
 Write-Host "`tPress any button to exit..." -ForegroundColor Yellow
 
