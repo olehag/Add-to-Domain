@@ -1,39 +1,49 @@
 ﻿#Lord Hagen / olehag04@nfk.no
 
+#DOMAIN, example: 'google.local'.
+$domain = ""
+#A DC in the Domain, example: 'dc1.google.local'.
+$DomainDC = ""
+#OU path, example: 'OU=Machine, OU=SalesTeam, DC=google, DC=local'.
+$OUPath = ""
+
+
+#Print ComputerName.
 Write-Host ""
 Write-Host ""
-Write-Host "`tDatamaskinnavn: " -NoNewline -ForegroundColor Yellow
+Write-Host "`tComputername: " -NoNewline -ForegroundColor Yellow
 $env:computername
 
 Write-Host ""
 Write-Host ""
 
-if (Test-Connection 'DOMENEKONTROLLEREN. EG: testdc.evry.local' -Quiet)
+#Test if computer can reach the DC. If it can't, Exit.
+if (Test-Connection polardc.nfkad.local -Quiet)
     {
-        Write-Host "`tKlar til innmelding!" -ForegroundColor Green
+        Write-Host "`tReady to continue!" -ForegroundColor Green
     }
 else 
     {
-        Write-Host "`tMå kobles til nettverket med Kabel!" -ForegroundColor Yellow
+        Write-Host "`tCan't reach the Domain!" -ForegroundColor Red
         Start-Sleep -Seconds 3
         Exit
     }
 
-Start-Sleep -s 2
+Start-Sleep -s 3
 Write-Host ""
 Write-Host ""
 
-Write-Host "`tTrykk på en knapp for å fortsette..." -ForegroundColor Yellow
+Write-Host "`tPress any button to continue..." -ForegroundColor Yellow
 
 $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 Write-Host ""
 Write-Host ""
 
-Write-Host "`tAutentiser med Passord!"
-                                                                                                    
-add-computer -domainname 'DOMENE' -oupath 'STI TIL OU' -Credential get-credential 'DOMENE'\
+Write-Host "`tAuthenticate with admin credentials!"
 
-Write-Host "`tTrykk på en knapp for å avslutte..." -ForegroundColor Yellow
+add-computer -domainname $domain -oupath $OUPath -Credential get-credential
+
+Write-Host "`tPress any button to exit..." -ForegroundColor Yellow
 
 $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
