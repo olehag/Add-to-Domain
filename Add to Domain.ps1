@@ -18,7 +18,7 @@ Write-Host ""
 Write-Host ""
 
 #Test if computer can reach the DC. If it can't, Exit.
-if (Test-Connection polardc.nfkad.local -Quiet)
+if (Test-Connection $DomainDC -Quiet)
     {
         Write-Host "`tReady to continue!" -ForegroundColor Green
     }
